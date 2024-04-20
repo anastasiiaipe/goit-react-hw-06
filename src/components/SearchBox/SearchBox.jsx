@@ -1,6 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import style from "./SearchBox.module.css";
 
-const SearchBox = ({ value, onChange }) => {
+import { changeFilter, selectNameFilter } from "../redux/filtersSlice";
+
+const SearchBox = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(selectNameFilter);
+
+  const handleChange = (event) => {
+    const searchTerm = event.target.value;
+    dispatch(changeFilter(searchTerm));
+  };
+
   return (
     <>
       <p className={style.searchText}>Find contacts by name </p>
@@ -9,7 +20,7 @@ const SearchBox = ({ value, onChange }) => {
         name="search"
         required
         autoFocus
-        onChange={(e) => onChange(e.target.value)}
+        onChange={handleChange}
         value={value}
         className={style.searchInput}
       />

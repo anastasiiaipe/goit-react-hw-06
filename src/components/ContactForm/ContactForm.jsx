@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { addContact } from "../redux/contactsSlice";
 
 const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const initialContact = {
     name: "",
     number: "",
@@ -22,8 +24,6 @@ const ContactForm = () => {
       .min(3, "Too short")
       .max(50, "Too long"),
   });
-
-  const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
     const newContact = {
